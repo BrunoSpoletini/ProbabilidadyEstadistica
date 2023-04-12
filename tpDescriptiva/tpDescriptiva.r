@@ -71,12 +71,22 @@ axis(side = 1, at = seq(0, 140, by = 10), labels = seq(0, 140, by = 10), cex.axi
 # Arboles con inclinacion 0:
 cant <- length(inclinacio[inclinacio == 0])
 
-#frec <- table(cut(inclinacio, seq(0, 42, by = 3), right = FALSE))
-#porc <- round((frec/dim(table)[1]),2)
-#y <- data.frame(frec, porc, cumsum(porc))[,-3]
-#colnames(y) = c("Intervalo","Frecuencia absoluta", "Frecuencia relativa", "Frecuencia relativa acumulada")
-#tabla <- xtable(y)
-#print(tabla, include.rownames = FALSE)
+frec <- table(cut(inclinacio, seq(0, 42, by = 3), right = FALSE))
+porc <- round((frec/dim(table)[1]),3)
+y <- data.frame(frec, porc, cumsum(porc))[,-3]
+colnames(y) = c("Intervalo","Frecuencia absoluta", "Frecuencia relativa", "Frecuencia relativa acumulada")
+tabla <- xtable(y)
+print(tabla, include.rownames = FALSE)
+
+
+
+hist(inclinacio, main = "Histograma de inclinación", xlab = "Inclinación (º)", ylab = "Frecuencia", 
+     ylim = range(0:260), col = "darkgoldenrod1", right = FALSE, 
+     breaks = seq(0, 42, by = 3), 
+     xlim = range(0:42), xaxt = "n") # xaxt = "n" turns off the x-axis labels
+
+
+axis(side = 1, at = seq(0, 42, by = 3), labels = seq(0, 42, by = 3), cex.axis = 1)
 
 
 
@@ -110,6 +120,20 @@ pie(table(origen), labels = c("Exótico", "Nativo/Autóctono"), main="Orígen de
 
 
 #Brotes
+
+#tabla
+frec <- table(brotes)
+porc <- round(frec/dim(table)[1],4)
+
+cumsum(porc)
+
+y <- data.frame(frec, round(porc,2), round(cumsum(porc),2))[,-3]
+colnames(y) = c("Nº brotes","Frecuencia absoluta", "Frecuencia relativa", "Frecuencia relativa acumulada")
+tabla <- xtable(y)
+print(tabla, include.rownames = FALSE)
+
+#grafico
+plot(frec, xlim=c(1,8), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia" ) #cex.axis=1.4
 
 
 
