@@ -17,7 +17,7 @@
 
 
 
-#table <- read_excel("Base1.xls")
+table <- read_excel("Base1.xls")
 
 #attach(table)
 
@@ -144,7 +144,32 @@ plot(frec, xlim=c(1,8), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia" ) #c
 #analizaremos la altura y la especie de los arboles
 
 
-boxplot(altura~especie)
+
+
+boxplot(altura~especie, ylab = "altura (m)", col = "aquamarine4", cex=1.5,cex.lab= 1.2)
+
+
+
+q <-split(table, table$especie) # separamos por especie
+quantile(q$Acacia$altura)# armamos el quartil por cada especie.
+quantile(q$Álamo$altura)
+quantile(q$Casuarina$altura)
+quantile(q$Ceibo$altura)
+quantile(q$Eucalipto$altura)
+quantile(q$Ficus$altura)
+quantile(q$Fresno$altura)
+quantile(q$Jacarandá$altura)
+quantile(q$`Palo borracho`$altura)
+
+y <- data.frame( c("Mínimo","1er Cuartil","Mediana","3er Cuartil","Máximo") , quantile(q$Acacia$altura), quantile(q$Álamo$altura),quantile(q$Casuarina$altura),
+                 quantile(q$Ceibo$altura), quantile(q$Eucalipto$altura), quantile(q$Ficus$altura),
+                 quantile(q$Fresno$altura), quantile(q$Jacarandá$altura), quantile(q$`Palo borracho`$altura)
+                 )
+colnames(y) = c("Medidas de interés","Acacia","Álamo", "Casuarina", "Ceibo" ,"Eucalipto", "Ficus", "Fresno", "Jacarandá", "Palo borracho")
+tabla <- xtable(y)
+print(tabla, include.rownames = FALSE)
+
+
 
 y= cut(altura, seq(0, 35, by = 2.5))
 
