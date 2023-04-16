@@ -39,7 +39,6 @@ print(tablaAltura, include.rownames = FALSE)
 
 
 
-
 hist(altura, main = "Histograma de altura", xlab = "Altura (m)", ylab = "Frecuencia", 
      ylim = range(0:80), col = "darkgoldenrod1", right = FALSE, 
      breaks = seq(0, 37.5, by = 2.5), 
@@ -47,6 +46,15 @@ hist(altura, main = "Histograma de altura", xlab = "Altura (m)", ylab = "Frecuen
 
 
 axis(side = 1, at = seq(0, 37.5, by = 2.5), labels = seq(0, 37.5, by = 2.5), cex.axis = 1)
+
+
+plot(main="Polígono de frecuencia relativa de altura", seq(0, 35, by = 2.5), porc, type="o", col="blue",xlim=c(0,37.5), ylim=c(0,0.2), xlab="Intervalo", ylab="Frecuencias relativas",xaxt="n")
+axis(side = 1, at = seq(0, 37.5, by = 2.5) - 1.25, labels = seq(0, 37.5, by = 2.5), cex.axis = 1, )
+axis(2)
+
+plot(main="Polígono de frecuencia relativa acumulativa de altura",seq(0, 35, by = 2.5), cumsum(porc), type="o", col="red",xlim=c(0,37.5), ylim=c(0,1), xlab="Intervalo", ylab="Frecuencias relativas acumuladas",xaxt="n")
+axis(side = 1, at = seq(0, 37.5, by = 2.5) - 1.25, labels = seq(0, 37.5, by = 2.5), cex.axis = 1, )
+axis(2)
 
 
 
@@ -88,6 +96,14 @@ hist(inclinacio, main = "Histograma de inclinación", xlab = "Inclinación (º)"
 
 axis(side = 1, at = seq(0, 42, by = 3), labels = seq(0, 42, by = 3), cex.axis = 1)
 
+plot(main="Polígono de frecuencia relativa de la inclinación", seq(0, 39, by = 3), porc, type="o", col="blue",xlim=c(0,42),ylim=c(0,0.8), xlab="Intervalo", ylab="Frecuencias relativas",xaxt="n")
+axis(side = 1, at = seq(0, 42, by = 3) - 1.5, labels = seq(0, 42, by = 3), cex.axis = 1, )
+axis(2)
+
+plot(main="Polígono de frecuencia relativa acumulativa de la inclinación",seq(0, 39, by = 3), cumsum(porc), type="o", col="red",xlim=c(0,42), ylim=c(0,1), xlab="Intervalo", ylab="Frecuencias relativas acumuladas",xaxt="n")
+axis(side = 1, at = seq(0, 42, by = 3) - 1.25, labels = seq(0, 42, by = 3), cex.axis = 1, )
+axis(2)
+
 
 
 #Especie
@@ -103,7 +119,16 @@ tabla <- xtable(y)
 print(tabla, include.rownames = FALSE)
 
 #grafico
-plot(frec, xlim=c(1,10), ylim=c(1,70), xlab="Especie", ylab="Frecuencia" ) #cex.axis=1.4
+plot(frec, xlim=c(1,10), ylim=c(1,70), xlab="Especie", ylab="Frecuencia", main="Gráfico de bastones de las especies de los árboles de la muestra" ) #cex.axis=1.4
+#axis(1, at = (0:8), labels = c("Acacia","Álamo", "Casuarina", "Ceibo" ,"Eucalipto", "Ficus", "Fresno", "Jacarandá", "Palo borracho") )
+
+
+aux <- c(frec,41)
+names(aux) <- c("Acacia","Álamo", "Casuarina", "Ceibo" ,"Eucalipto", "Ficus", "Fresno", "Jacarandá", "Palo borracho", "Palo borracho")
+plot(aux, xlim=c(1,10), ylim=c(1,70), xlab="Especie", ylab="Frecuencia", type='s',axes = FALSE, main= "Gráfico escalonado de las especies de los árboles de la muestra" ) #cex.axis=1.4 #axes = FALSE
+axis(1, at = (1:9) + 0.5, labels = c("Acacia","Álamo", "Casuarina", "Ceibo" ,"Eucalipto", "Ficus", "Fresno", "Jacarandá", "Palo borracho"), tick = FALSE) # desplazamos el eje x
+axis(1, at = (1:10), tick = TRUE, labels = FALSE) # ponemos las barras separadoras
+axis(2) # dejamos el eje y por defecto.
 
 
 #Origen
@@ -117,6 +142,7 @@ print(tabla, include.rownames = FALSE)
 y
 
 pie(table(origen), labels = c("Exótico", "Nativo/Autóctono"), main="Orígen de los árboles censados")
+
 
 
 #Brotes
@@ -133,7 +159,23 @@ tabla <- xtable(y)
 print(tabla, include.rownames = FALSE)
 
 #grafico
-plot(frec, xlim=c(1,8), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia" ) #cex.axis=1.4
+plot(frec, xlim=c(1,8), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia", main= "Gráfico de bastones de número de brotes de los árboles de la muestra" ) #cex.axis=1.4
+
+
+
+plot(frec, xlim=c(0,8), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia",type = 's', axes = FALSE, main= "Gráfico escalonado del número de brotes de los árboles de la muestra") #axes = FALSE
+axis(1, at = (0:8) + 0.5, labels = 0:8, tick = FALSE) # desplazamos el eje x
+axis(1, at = (0:8), tick = TRUE, labels = FALSE) # ponemos las barras separadoras
+axis(2) # dejamos el eje y por defecto.
+
+
+
+aux <- c(frec,2)
+names(aux) <- 0:9
+plot(aux, xlim=c(1,10), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia",type = 's', axes = FALSE) #axes = FALSE
+axis(1, at = (0:8) + 1.5, labels = 0:8, tick = FALSE) # desplazamos el eje x
+axis(1, at = (0:10), tick = TRUE, labels = FALSE) # ponemos las barras separadoras
+axis(2) # dejamos el eje y por defecto.
 
 
 
@@ -146,7 +188,7 @@ plot(frec, xlim=c(1,8), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia" ) #c
 
 
 
-boxplot(altura~especie, ylab = "altura (m)", col = "aquamarine4", cex=1.5,cex.lab= 1.2)
+boxplot(altura~especie, ylab = "altura (m)", col = "aquamarine4", cex=1.5,cex.lab= 1.2, main= " Boxplot bivariado de Altura y Especie de los árboles de la muestra")
 
 
 
