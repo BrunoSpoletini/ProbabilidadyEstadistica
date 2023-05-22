@@ -10,16 +10,16 @@
 
 
 
-
-
-
-
+install.packages("readxl")
+library("readxl")
+install.packages("xtable")
+library(xtable)
 
 
 
 table <- read_excel("Base1.xls")
 
-#attach(table)
+attach(table)
 
 library("readxl")
 library("xtable")
@@ -47,6 +47,18 @@ hist(altura, main = "Histograma de altura", xlab = "Altura (m)", ylab = "Frecuen
 
 
 axis(side = 1, at = seq(0, 37.5, by = 2.5), labels = seq(0, 37.5, by = 2.5), cex.axis = 1)
+
+plot(porc, type="o",xlim=c(0,37.5), ylim=c(0,0.2), xlab="Intervalo", ylab="Frecuencia Relativa",xaxt="n")
+
+
+
+plot(main="Polígono de frecuencia relativa de altura", seq(0, 35, by = 2.5), porc, type="o", col="blue",xlim=c(0,37.5), ylim=c(0,0.2), xlab="Intervalo", ylab="Frecuencias relativas",xaxt="n")
+axis(side = 1, at = seq(0, 37.5, by = 2.5) - 1.25, labels = seq(0, 37.5, by = 2.5), cex.axis = 1, )
+axis(2)
+
+plot(main="Polígono de frecuencia relativa acumulativa de altura",seq(0, 35, by = 2.5), cumsum(porc), type="o", col="red",xlim=c(0,37.5), ylim=c(0,1), xlab="Intervalo", ylab="Frecuencias relativas acumuladas",xaxt="n")
+axis(side = 1, at = seq(0, 37.5, by = 2.5) - 1.25, labels = seq(0, 37.5, by = 2.5), cex.axis = 1, )
+axis(2)
 
 
 
@@ -89,6 +101,14 @@ hist(inclinacio, main = "Histograma de inclinación", xlab = "Inclinación (º)"
 axis(side = 1, at = seq(0, 42, by = 3), labels = seq(0, 42, by = 3), cex.axis = 1)
 
 
+plot(main="Polígono de frecuencia relativa de la inclinación", seq(0, 39, by = 3), porc, type="o", col="blue",xlim=c(0,42),ylim=c(0,0.8), xlab="Intervalo", ylab="Frecuencias relativas",xaxt="n")
+axis(side = 1, at = seq(0, 42, by = 3) - 1.5, labels = seq(0, 42, by = 3), cex.axis = 1, )
+axis(2)
+
+plot(main="Polígono de frecuencia relativa acumulativa de la inclinación",seq(0, 39, by = 3), cumsum(porc), type="o", col="red",xlim=c(0,42), ylim=c(0,1), xlab="Intervalo", ylab="Frecuencias relativas acumuladas",xaxt="n")
+axis(side = 1, at = seq(0, 42, by = 3) - 1.25, labels = seq(0, 42, by = 3), cex.axis = 1, )
+axis(2)
+
 
 #Especie
 #tabla
@@ -101,6 +121,9 @@ y <- data.frame(frec, round(porc,2), round(cumsum(porc),2))[,-3]
 colnames(y) = c("Intervalo","Frecuencia absoluta", "Frecuencia relativa", "Frecuencia relativa acumulada")
 tabla <- xtable(y)
 print(tabla, include.rownames = FALSE)
+
+pie(table(especie), main="Especie de los árboles censados", labels=paste(y[,1], paste(porc*100,"%",sep="")))
+
 
 #grafico
 plot(frec, xlim=c(1,10), ylim=c(1,70), xlab="Especie", ylab="Frecuencia" ) #cex.axis=1.4
@@ -116,7 +139,7 @@ tabla <- xtable(y)
 print(tabla, include.rownames = FALSE)
 y
 
-pie(table(origen), labels = c("Exótico", "Nativo/Autóctono"), main="Orígen de los árboles censados")
+pie(table(origen), labels = c("Exótico 68.9%", "Nativo/Autóctono 31.1%"), main="Orígen de los árboles censados")
 
 
 #Brotes
@@ -133,11 +156,15 @@ tabla <- xtable(y)
 print(tabla, include.rownames = FALSE)
 
 #grafico
-plot(frec, xlim=c(1,8), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia" ) #cex.axis=1.4
+plot(frec, xlim=c(0,8), ylim=c(1,100), xlab="Nº brotes", ylab="Frecuencia" ) #cex.axis=1.4
+
+plot(cumsum(porc), type="s",xlab="Nº brotes", ylab="Frecuencia relativa acumulada" )#xaxt="n"
+plot(0:8, cumsum(porc),  type="s", xlim=c(0,8), xaxt="n")
 
 
 
-
+axis(side = 1, at = seq(0, , by = 3) - 1.25, labels = seq(0, 42, by = 3), cex.axis = 1 )
+axis(2)
 
 #Analisis bivariado
 
