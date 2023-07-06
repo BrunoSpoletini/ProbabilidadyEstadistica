@@ -88,8 +88,8 @@ print(tabla, include.rownames = FALSE)
 
 
 
-hist(inclinacio, main = "Histograma de inclinación", xlab = "Inclinación (º)", ylab = "Frecuencia", 
-     ylim = range(0:260), col = "darkgoldenrod1", right = FALSE, 
+hist(inclinacio, main = "Distribución de la inclinación de los arboles muestrados", xlab = "Inclinación (º)", ylab = "Frecuencia", 
+     ylim = range(0:300), col = "darkgoldenrod1", right = FALSE, 
      breaks = seq(0, 42, by = 3), 
      xlim = range(0:42), xaxt = "n") # xaxt = "n" turns off the x-axis labels
 
@@ -188,7 +188,7 @@ axis(2) # dejamos el eje y por defecto.
 
 
 
-boxplot(altura~especie, ylab = "altura (m)", col = "aquamarine4", cex=1.5,cex.lab= 1.2, main= " Boxplot bivariado de Altura y Especie de los árboles de la muestra")
+boxplot(altura~especie, ylab = "altura (m)", col = "aquamarine4", cex=1.5,cex.lab= 1.2, main= "Análisis de la altura respecto a la especie de los árboles de la muestra")
 
 
 
@@ -218,3 +218,31 @@ y= cut(altura, seq(0, 35, by = 2.5))
 j = table(y, especie)
 tabla <- xtable(j)
 print(tabla, include.rownames = FALSE)
+
+
+
+
+
+
+
+quantile(altura)
+quantile(diametro)
+quantile(inclinacio)
+quantile(brotes)
+
+y <- data.frame( c("Mínimo","1er Cuartil","Mediana","3er Cuartil","Máximo") , quantile(brotes)
+)
+colnames(y) = c("Medidas de interés","Brotes")
+tabla <- xtable(y)
+print(tabla, include.rownames = FALSE)
+
+
+# mean(altura)
+
+# desviacion estandar: sqrt(var(altura))
+
+
+
+
+
+
