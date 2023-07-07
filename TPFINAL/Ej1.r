@@ -22,7 +22,6 @@ for (i in 1:(10000)) {
 }
 
 # hacemos esto varias veces y vemos como se distribuyen estos valores.
-
 hist(vector)
 
 media = mean(vector)
