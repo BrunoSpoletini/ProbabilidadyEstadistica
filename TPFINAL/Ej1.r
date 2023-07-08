@@ -1,4 +1,4 @@
-N = 5
+N = 20
 
 cinco = rexp(N, rate = 0.5 )
 suma = sum(cinco)
@@ -22,7 +22,7 @@ for (i in 1:(10000)) {
 }
 
 # hacemos esto varias veces y vemos como se distribuyen estos valores.
-hist(vector)
+hist(vector,main = "Histograma de 10.000 simulaciones de la variable C",ylim = range(0:2500), xlab = "Suma de 100 variables con distribucion exponencial de tasa 0,5", ylab = "Frecuencia")
 
 media = mean(vector)
 desvio = sd(vector)

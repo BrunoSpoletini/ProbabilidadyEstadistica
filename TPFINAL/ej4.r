@@ -8,7 +8,7 @@ acum = c( c( c(0), cumsum(hora)), c(1))
 xdata = acum
 ydata = c(0:puntos, c(puntos))
 
-plot(main="Clientes en primera hora", xdata, ydata, type="s", col="red",xlim=c(0,1),ylim=c(0,10), xlab="tiempo", ylab="Clientes",xaxt="n")
+plot(main="Simulación de Nº de clientes en la primera hora de la jornada", xdata, ydata, type="s", col="red",xlim=c(0,1),ylim=c(0,5), xlab="Tiempo (horas)", ylab="Nº de Clientes",xaxt="n")
 axis( side = 1, at = seq(0, 1, by = 0.1), labels = seq(0, 1, by = 0.1), cex.axis = 1 )
 axis(2)
 
